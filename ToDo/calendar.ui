@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Calendar</class>
+ <widget class="QDialog" name="Calendar">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Календарь</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: #333F51;
+</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="3" column="0">
+    <spacer name="horizontalSpacer">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>29</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="4" column="1">
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>41</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="1" column="1">
+    <spacer name="verticalSpacer_2">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>29</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="2" column="2">
+    <spacer name="horizontalSpacer_2">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>41</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="2" column="1" rowspan="2">
+    <widget class="QCalendarWidget" name="calendarWidget">
+     <property name="minimumSize">
+      <size>
+       <width>700</width>
+       <height>500</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QCalendarWidget QWidget#qt_calendar_navigationbar {
+    background-color: #FFD8BA;
+    color: #333F51;
+    font-size: 18pt;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+QCalendarWidget QToolButton {
+    background-color: transparent;
+    border: none;
+    color: #950505;
+    icon-size: 30px;
+}
+
+QCalendarWidget QAbstractItemView {
+    background-color: #333F51;
+    border: none;
+    outline: none;
+    font-weight: bold;
+}
+
+QCalendarWidget QAbstractItemView::item {
+    background-color: white;
+    border: none;
+    border-radius: 8px;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    margin: 3px;
+}
+
+QCalendarWidget QAbstractItemView::item:selected {
+    background-color: #FFD8BA;
+    color: #333F51;
+    font-weight: bold;
+}
+
+QCalendarWidget QAbstractItemView::item:hover {
+    background-color: white;
+    border: 4px solid #FFD8BA;
+}
+
+QCalendarWidget QTableView QHeaderView::section {
+    color: #1E90FF;
+    background-color: #FFD8BA;
+    font-weight: bold;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+QCalendarWidget QWidget#qt_calendar_yearbutton,
+QCalendarWidget QWidget#qt_calendar_monthbutton {
+    color: #950505;
+    background-color: transparent;
+    border: none;
+}
+
+QCalendarWidget QWidget#qt_calendar_yearbutton:hover,
+QCalendarWidget QWidget#qt_calendar_monthbutton:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+QCalendarWidget:focus {
+    outline: none;
+}
+
+QCalendarWidget QMenu {
+    background-color: #333F51;
+    border: 1px solid #950505;
+}
+
+QCalendarWidget QMenu::item {
+    background-color: #FFD8BA;
+    color: #950505;
+    padding: 5px 20px;
+    font-weight: bold;
+}
+
+QCalendarWidget QMenu::item:selected {
+    background-color: #FFD8BA;
+    color: #950505; 
+    border: 2px solid #950505;
+}
+
+QCalendarWidget QMenu::item:hover {
+    background-color: #FFD8BA;
+    color: #950505; 
+    border: 2px solid #950505;
+}
+</string>
+     </property>
+     <property name="firstDayOfWeek">
+      <enum>Qt::Monday</enum>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

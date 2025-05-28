@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/resources">
+        <file>resources/cal.png</file>
+        <file>resources/logo.png</file>
+        <file>resources/notebook.png</file>
+        <file>resources/pen.png</file>
+        <file>resources/plusik.png</file>
+    </qresource>
+</RCC>
