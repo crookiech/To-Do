@@ -1,18 +1,14 @@
-#include "authdialog.h"
+#include "auth_dialog.h"
 #include "globals.h"
-#include "calendar.h"
 #include <QApplication>
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    AuthDialog authDialog;
-    authDialog.exec();
+    initialize_paths();
+    current_user_id = -1;
+    current_username = "";
+    Auth_Dialog auth_dialog;
+    auth_dialog.exec();
     return 0;
-
-
-    // QApplication a(argc, argv);
-    // AuthDialog authDialog;
-    // authDialog.show();
-    // return a.exec();
 }

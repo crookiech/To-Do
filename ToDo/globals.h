@@ -3,8 +3,10 @@
 
 #include <QString>
 
-inline QString path_to_tasks = "../tasks.json";
-inline int current_user_id = 1;
-inline QString current_username = "";
+extern QString path_to_tasks;
+extern int current_user_id;
+extern QString current_username;
+extern bool is_online_mode;
+void initialize_paths();
 
 #endif // GLOBALS_H

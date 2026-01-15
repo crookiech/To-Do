@@ -51,18 +51,19 @@ OBJECTS_DIR   = release
 ####### Files
 
 SOURCES       = ..\..\add.cpp \
-		..\..\apiclient.cpp \
-		..\..\authdialog.cpp \
+		..\..\api_client.cpp \
+		..\..\auth_dialog.cpp \
 		..\..\calendar.cpp \
 		..\..\edit.cpp \
+		..\..\globals.cpp \
 		..\..\json_file_manager.cpp \
 		..\..\main.cpp \
 		..\..\main_window.cpp \
 		..\..\todo_list.cpp \
 		..\..\working_with_files.cpp release\qrc_resources.cpp \
 		release\moc_add.cpp \
-		release\moc_apiclient.cpp \
-		release\moc_authdialog.cpp \
+		release\moc_api_client.cpp \
+		release\moc_auth_dialog.cpp \
 		release\moc_calendar.cpp \
 		release\moc_edit.cpp \
 		release\moc_json_file_manager.cpp \
@@ -70,10 +71,11 @@ SOURCES       = ..\..\add.cpp \
 		release\moc_todo_list.cpp \
 		release\moc_working_with_files.cpp
 OBJECTS       = release/add.o \
-		release/apiclient.o \
-		release/authdialog.o \
+		release/api_client.o \
+		release/auth_dialog.o \
 		release/calendar.o \
 		release/edit.o \
+		release/globals.o \
 		release/json_file_manager.o \
 		release/main.o \
 		release/main_window.o \
@@ -81,8 +83,8 @@ OBJECTS       = release/add.o \
 		release/working_with_files.o \
 		release/qrc_resources.o \
 		release/moc_add.o \
-		release/moc_apiclient.o \
-		release/moc_authdialog.o \
+		release/moc_api_client.o \
+		release/moc_auth_dialog.o \
 		release/moc_calendar.o \
 		release/moc_edit.o \
 		release/moc_json_file_manager.o \
@@ -91,8 +93,8 @@ OBJECTS       = release/add.o \
 		release/moc_working_with_files.o
 
 DIST          =  ..\..\add.h \
-		..\..\apiclient.h \
-		..\..\authdialog.h \
+		..\..\api_client.h \
+		..\..\auth_dialog.h \
 		..\..\calendar.h \
 		..\..\edit.h \
 		..\..\globals.h \
@@ -100,10 +102,11 @@ DIST          =  ..\..\add.h \
 		..\..\main_window.h \
 		..\..\todo_list.h \
 		..\..\working_with_files.h ..\..\add.cpp \
-		..\..\apiclient.cpp \
-		..\..\authdialog.cpp \
+		..\..\api_client.cpp \
+		..\..\auth_dialog.cpp \
 		..\..\calendar.cpp \
 		..\..\edit.cpp \
+		..\..\globals.cpp \
 		..\..\json_file_manager.cpp \
 		..\..\main.cpp \
 		..\..\main_window.cpp \
@@ -128,10 +131,10 @@ qmake: FORCE
 qmake_all: FORCE
 
 dist:
-	$(ZIP) ToDo.zip $(SOURCES) $(DIST) ..\..\..\..\ToDo.pro C:\msys64\mingw64\share\qt5\mkspecs\features\spec_pre.prf C:\msys64\mingw64\share\qt5\mkspecs\qdevice.pri C:\msys64\mingw64\share\qt5\mkspecs\features\device_config.prf C:\msys64\mingw64\share\qt5\mkspecs\common\sanitize.conf C:\msys64\mingw64\share\qt5\mkspecs\common\gcc-base.conf C:\msys64\mingw64\share\qt5\mkspecs\common\g++-base.conf C:\msys64\mingw64\share\qt5\mkspecs\common\angle.conf C:\msys64\mingw64\share\qt5\mkspecs\features\win32\windows_vulkan_sdk.prf C:\msys64\mingw64\share\qt5\mkspecs\common\windows-vulkan.conf C:\msys64\mingw64\share\qt5\mkspecs\common\g++-win32.conf C:\msys64\mingw64\share\qt5\mkspecs\common\windows-desktop.conf C:\msys64\mingw64\share\qt5\mkspecs\qconfig.pri C:\msys64\mingw64\share\qt5\mkspecs\modules\qt_lib_accessibility_support_private.pri C:\msys64\mingw64\share\qt5\mkspecs\modules\qt_lib_bootstrap_private.pri C:\msys64\mingw64\share\qt5\mkspecs\modules\qt_lib_concurrent.pri C:\msys64\mingw64\share\qt5\mkspecs\modules\qt_lib_concurrent_private.pri C:\msys64\mingw64\share\qt5\mkspecs\modules\qt_lib_core.pri C:\msys64\mingw64\share\qt5\mkspecs\modules\qt_lib_core_private.pri C:\msys64\mingw64\share\qt5\mkspecs\modules\qt_lib_dbus.pri C:\msys64\mingw64\share\qt5\mkspecs\modules\qt_lib_dbus_private.pri C:\msys64\mingw64\share\qt5\mkspecs\modules\qt_lib_devicediscovery_support_private.pri C:\msys64\mingw64\share\qt5\mkspecs\modules\qt_lib_edid_support_private.pri C:\msys64\mingw64\share\qt5\mkspecs\modules\qt_lib_eventdispatcher_support_private.pri C:\msys64\mingw64\share\qt5\mkspecs\modules\qt_lib_fb_support_private.pri C:\msys64\mingw64\share\qt5\mkspecs\modules\qt_lib_fontdatabase_support_private.pri C:\msys64\mingw64\share\qt5\mkspecs\modules\qt_lib_gui.pri C:\msys64\mingw64\share\qt5\mkspecs\modules\qt_lib_gui_private.pri C:\msys64\mingw64\share\qt5\mkspecs\modules\qt_lib_network.pri C:\msys64\mingw64\share\qt5\mkspecs\modules\qt_lib_network_private.pri C:\msys64\mingw64\share\qt5\mkspecs\modules\qt_lib_opengl.pri C:\msys64\mingw64\share\qt5\mkspecs\modules\qt_lib_opengl_private.pri C:\msys64\mingw64\share\qt5\mkspecs\modules\qt_lib_openglextensions.pri C:\msys64\mingw64\share\qt5\mkspecs\modules\qt_lib_openglextensions_private.pri C:\msys64\mingw64\share\qt5\mkspecs\modules\qt_lib_platformcompositor_support_private.pri C:\msys64\mingw64\share\qt5\mkspecs\modules\qt_lib_printsupport.pri C:\msys64\mingw64\share\qt5\mkspecs\modules\qt_lib_printsupport_private.pri C:\msys64\mingw64\share\qt5\mkspecs\modules\qt_lib_sql.pri C:\msys64\mingw64\share\qt5\mkspecs\modules\qt_lib_sql_private.pri C:\msys64\mingw64\share\qt5\mkspecs\modules\qt_lib_testlib.pri C:\msys64\mingw64\share\qt5\mkspecs\modules\qt_lib_testlib_private.pri C:\msys64\mingw64\share\qt5\mkspecs\modules\qt_lib_theme_support_private.pri C:\msys64\mingw64\share\qt5\mkspecs\modules\qt_lib_vulkan_support_private.pri C:\msys64\mingw64\share\qt5\mkspecs\modules\qt_lib_widgets.pri C:\msys64\mingw64\share\qt5\mkspecs\modules\qt_lib_widgets_private.pri C:\msys64\mingw64\share\qt5\mkspecs\modules\qt_lib_windowsuiautomation_support_private.pri C:\msys64\mingw64\share\qt5\mkspecs\modules\qt_lib_xml.pri C:\msys64\mingw64\share\qt5\mkspecs\modules\qt_lib_xml_private.pri C:\msys64\mingw64\share\qt5\mkspecs\features\qt_functions.prf C:\msys64\mingw64\share\qt5\mkspecs\features\qt_config.prf C:\msys64\mingw64\share\qt5\mkspecs\win32-g++\qmake.conf C:\msys64\mingw64\share\qt5\mkspecs\features\spec_post.prf .qmake.stash C:\msys64\mingw64\share\qt5\mkspecs\features\exclusive_builds.prf C:\msys64\mingw64\share\qt5\mkspecs\features\toolchain.prf C:\msys64\mingw64\share\qt5\mkspecs\features\default_pre.prf C:\msys64\mingw64\share\qt5\mkspecs\features\win32\default_pre.prf C:\msys64\mingw64\share\qt5\mkspecs\features\resolve_config.prf C:\msys64\mingw64\share\qt5\mkspecs\features\exclusive_builds_post.prf C:\msys64\mingw64\share\qt5\mkspecs\features\default_post.prf C:\msys64\mingw64\share\qt5\mkspecs\features\build_pass.prf C:\msys64\mingw64\share\qt5\mkspecs\features\qml_debug.prf C:\msys64\mingw64\share\qt5\mkspecs\features\precompile_header.prf C:\msys64\mingw64\share\qt5\mkspecs\features\warn_on.prf C:\msys64\mingw64\share\qt5\mkspecs\features\qt.prf C:\msys64\mingw64\share\qt5\mkspecs\features\resources_functions.prf C:\msys64\mingw64\share\qt5\mkspecs\features\resources.prf C:\msys64\mingw64\share\qt5\mkspecs\features\moc.prf C:\msys64\mingw64\share\qt5\mkspecs\features\win32\opengl.prf C:\msys64\mingw64\share\qt5\mkspecs\features\uic.prf C:\msys64\mingw64\share\qt5\mkspecs\features\qmake_use.prf C:\msys64\mingw64\share\qt5\mkspecs\features\file_copies.prf C:\msys64\mingw64\share\qt5\mkspecs\features\win32\windows.prf C:\msys64\mingw64\share\qt5\mkspecs\features\testcase_targets.prf C:\msys64\mingw64\share\qt5\mkspecs\features\exceptions.prf C:\msys64\mingw64\share\qt5\mkspecs\features\yacc.prf C:\msys64\mingw64\share\qt5\mkspecs\features\lex.prf ..\..\ToDo.pro ..\..\resources.qrc C:\msys64\mingw64\lib\qtmain.prl   ..\..\resources.qrc C:\msys64\mingw64\share\qt5\mkspecs\features\data\dummy.cpp ..\..\add.h ..\..\apiclient.h ..\..\authdialog.h ..\..\calendar.h ..\..\edit.h ..\..\globals.h ..\..\json_file_manager.h ..\..\main_window.h ..\..\todo_list.h ..\..\working_with_files.h  ..\..\add.cpp ..\..\apiclient.cpp ..\..\authdialog.cpp ..\..\calendar.cpp ..\..\edit.cpp ..\..\json_file_manager.cpp ..\..\main.cpp ..\..\main_window.cpp ..\..\todo_list.cpp ..\..\working_with_files.cpp ..\..\add.ui ..\..\calendar.ui ..\..\edit.ui ..\..\main_window.ui ..\..\todo_list.ui ..\..\auth.ui    
+	$(ZIP) ToDo.zip $(SOURCES) $(DIST) ..\..\ToDo.pro C:\msys64\mingw64\share\qt5\mkspecs\features\spec_pre.prf C:\msys64\mingw64\share\qt5\mkspecs\qdevice.pri C:\msys64\mingw64\share\qt5\mkspecs\features\device_config.prf C:\msys64\mingw64\share\qt5\mkspecs\common\sanitize.conf C:\msys64\mingw64\share\qt5\mkspecs\common\gcc-base.conf C:\msys64\mingw64\share\qt5\mkspecs\common\g++-base.conf C:\msys64\mingw64\share\qt5\mkspecs\common\angle.conf C:\msys64\mingw64\share\qt5\mkspecs\features\win32\windows_vulkan_sdk.prf C:\msys64\mingw64\share\qt5\mkspecs\common\windows-vulkan.conf C:\msys64\mingw64\share\qt5\mkspecs\common\g++-win32.conf C:\msys64\mingw64\share\qt5\mkspecs\common\windows-desktop.conf C:\msys64\mingw64\share\qt5\mkspecs\qconfig.pri C:\msys64\mingw64\share\qt5\mkspecs\modules\qt_lib_accessibility_support_private.pri C:\msys64\mingw64\share\qt5\mkspecs\modules\qt_lib_bootstrap_private.pri C:\msys64\mingw64\share\qt5\mkspecs\modules\qt_lib_concurrent.pri C:\msys64\mingw64\share\qt5\mkspecs\modules\qt_lib_concurrent_private.pri C:\msys64\mingw64\share\qt5\mkspecs\modules\qt_lib_core.pri C:\msys64\mingw64\share\qt5\mkspecs\modules\qt_lib_core_private.pri C:\msys64\mingw64\share\qt5\mkspecs\modules\qt_lib_dbus.pri C:\msys64\mingw64\share\qt5\mkspecs\modules\qt_lib_dbus_private.pri C:\msys64\mingw64\share\qt5\mkspecs\modules\qt_lib_devicediscovery_support_private.pri C:\msys64\mingw64\share\qt5\mkspecs\modules\qt_lib_edid_support_private.pri C:\msys64\mingw64\share\qt5\mkspecs\modules\qt_lib_eventdispatcher_support_private.pri C:\msys64\mingw64\share\qt5\mkspecs\modules\qt_lib_fb_support_private.pri C:\msys64\mingw64\share\qt5\mkspecs\modules\qt_lib_fontdatabase_support_private.pri C:\msys64\mingw64\share\qt5\mkspecs\modules\qt_lib_gui.pri C:\msys64\mingw64\share\qt5\mkspecs\modules\qt_lib_gui_private.pri C:\msys64\mingw64\share\qt5\mkspecs\modules\qt_lib_network.pri C:\msys64\mingw64\share\qt5\mkspecs\modules\qt_lib_network_private.pri C:\msys64\mingw64\share\qt5\mkspecs\modules\qt_lib_opengl.pri C:\msys64\mingw64\share\qt5\mkspecs\modules\qt_lib_opengl_private.pri C:\msys64\mingw64\share\qt5\mkspecs\modules\qt_lib_openglextensions.pri C:\msys64\mingw64\share\qt5\mkspecs\modules\qt_lib_openglextensions_private.pri C:\msys64\mingw64\share\qt5\mkspecs\modules\qt_lib_platformcompositor_support_private.pri C:\msys64\mingw64\share\qt5\mkspecs\modules\qt_lib_printsupport.pri C:\msys64\mingw64\share\qt5\mkspecs\modules\qt_lib_printsupport_private.pri C:\msys64\mingw64\share\qt5\mkspecs\modules\qt_lib_sql.pri C:\msys64\mingw64\share\qt5\mkspecs\modules\qt_lib_sql_private.pri C:\msys64\mingw64\share\qt5\mkspecs\modules\qt_lib_testlib.pri C:\msys64\mingw64\share\qt5\mkspecs\modules\qt_lib_testlib_private.pri C:\msys64\mingw64\share\qt5\mkspecs\modules\qt_lib_theme_support_private.pri C:\msys64\mingw64\share\qt5\mkspecs\modules\qt_lib_vulkan_support_private.pri C:\msys64\mingw64\share\qt5\mkspecs\modules\qt_lib_widgets.pri C:\msys64\mingw64\share\qt5\mkspecs\modules\qt_lib_widgets_private.pri C:\msys64\mingw64\share\qt5\mkspecs\modules\qt_lib_windowsuiautomation_support_private.pri C:\msys64\mingw64\share\qt5\mkspecs\modules\qt_lib_xml.pri C:\msys64\mingw64\share\qt5\mkspecs\modules\qt_lib_xml_private.pri C:\msys64\mingw64\share\qt5\mkspecs\features\qt_functions.prf C:\msys64\mingw64\share\qt5\mkspecs\features\qt_config.prf C:\msys64\mingw64\share\qt5\mkspecs\win32-g++\qmake.conf C:\msys64\mingw64\share\qt5\mkspecs\features\spec_post.prf .qmake.stash C:\msys64\mingw64\share\qt5\mkspecs\features\exclusive_builds.prf C:\msys64\mingw64\share\qt5\mkspecs\features\toolchain.prf C:\msys64\mingw64\share\qt5\mkspecs\features\default_pre.prf C:\msys64\mingw64\share\qt5\mkspecs\features\win32\default_pre.prf C:\msys64\mingw64\share\qt5\mkspecs\features\resolve_config.prf C:\msys64\mingw64\share\qt5\mkspecs\features\exclusive_builds_post.prf C:\msys64\mingw64\share\qt5\mkspecs\features\default_post.prf C:\msys64\mingw64\share\qt5\mkspecs\features\build_pass.prf C:\msys64\mingw64\share\qt5\mkspecs\features\qml_debug.prf C:\msys64\mingw64\share\qt5\mkspecs\features\precompile_header.prf C:\msys64\mingw64\share\qt5\mkspecs\features\warn_on.prf C:\msys64\mingw64\share\qt5\mkspecs\features\qt.prf C:\msys64\mingw64\share\qt5\mkspecs\features\resources_functions.prf C:\msys64\mingw64\share\qt5\mkspecs\features\resources.prf C:\msys64\mingw64\share\qt5\mkspecs\features\moc.prf C:\msys64\mingw64\share\qt5\mkspecs\features\win32\opengl.prf C:\msys64\mingw64\share\qt5\mkspecs\features\uic.prf C:\msys64\mingw64\share\qt5\mkspecs\features\qmake_use.prf C:\msys64\mingw64\share\qt5\mkspecs\features\file_copies.prf C:\msys64\mingw64\share\qt5\mkspecs\features\win32\windows.prf C:\msys64\mingw64\share\qt5\mkspecs\features\testcase_targets.prf C:\msys64\mingw64\share\qt5\mkspecs\features\exceptions.prf C:\msys64\mingw64\share\qt5\mkspecs\features\yacc.prf C:\msys64\mingw64\share\qt5\mkspecs\features\lex.prf ..\..\ToDo.pro ..\..\resources.qrc C:\msys64\mingw64\lib\qtmain.prl   ..\..\resources.qrc C:\msys64\mingw64\share\qt5\mkspecs\features\data\dummy.cpp ..\..\add.h ..\..\api_client.h ..\..\auth_dialog.h ..\..\calendar.h ..\..\edit.h ..\..\globals.h ..\..\json_file_manager.h ..\..\main_window.h ..\..\todo_list.h ..\..\working_with_files.h  ..\..\add.cpp ..\..\api_client.cpp ..\..\auth_dialog.cpp ..\..\calendar.cpp ..\..\edit.cpp ..\..\globals.cpp ..\..\json_file_manager.cpp ..\..\main.cpp ..\..\main_window.cpp ..\..\todo_list.cpp ..\..\working_with_files.cpp ..\..\add.ui ..\..\calendar.ui ..\..\edit.ui ..\..\main_window.ui ..\..\todo_list.ui ..\..\auth.ui    
 
 clean: compiler_clean 
-	-$(DEL_FILE) release\add.o release\apiclient.o release\authdialog.o release\calendar.o release\edit.o release\json_file_manager.o release\main.o release\main_window.o release\todo_list.o release\working_with_files.o release\qrc_resources.o release\moc_add.o release\moc_apiclient.o release\moc_authdialog.o release\moc_calendar.o release\moc_edit.o release\moc_json_file_manager.o release\moc_main_window.o release\moc_todo_list.o release\moc_working_with_files.o
+	-$(DEL_FILE) release\add.o release\api_client.o release\auth_dialog.o release\calendar.o release\edit.o release\globals.o release\json_file_manager.o release\main.o release\main_window.o release\todo_list.o release\working_with_files.o release\qrc_resources.o release\moc_add.o release\moc_api_client.o release\moc_auth_dialog.o release\moc_calendar.o release\moc_edit.o release\moc_json_file_manager.o release\moc_main_window.o release\moc_todo_list.o release\moc_working_with_files.o
 
 distclean: clean 
 	-$(DEL_FILE) .qmake.stash
@@ -166,27 +169,23 @@ compiler_moc_predefs_clean:
 release/moc_predefs.h: C:/msys64/mingw64/share/qt5/mkspecs/features/data/dummy.cpp
 	g++ -fno-keep-inline-dllexport -march=nocona -msahf -mtune=generic -Wa,-mbig-obj -O2 -std=gnu++1z -Wall -Wextra -Wextra -dM -E -o release\moc_predefs.h C:\msys64\mingw64\share\qt5\mkspecs\features\data\dummy.cpp
 
-compiler_moc_header_make_all: release/moc_add.cpp release/moc_apiclient.cpp release/moc_authdialog.cpp release/moc_calendar.cpp release/moc_edit.cpp release/moc_json_file_manager.cpp release/moc_main_window.cpp release/moc_todo_list.cpp release/moc_working_with_files.cpp
+compiler_moc_header_make_all: release/moc_add.cpp release/moc_api_client.cpp release/moc_auth_dialog.cpp release/moc_calendar.cpp release/moc_edit.cpp release/moc_json_file_manager.cpp release/moc_main_window.cpp release/moc_todo_list.cpp release/moc_working_with_files.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) release\moc_add.cpp release\moc_apiclient.cpp release\moc_authdialog.cpp release\moc_calendar.cpp release\moc_edit.cpp release\moc_json_file_manager.cpp release\moc_main_window.cpp release\moc_todo_list.cpp release\moc_working_with_files.cpp
+	-$(DEL_FILE) release\moc_add.cpp release\moc_api_client.cpp release\moc_auth_dialog.cpp release\moc_calendar.cpp release\moc_edit.cpp release\moc_json_file_manager.cpp release\moc_main_window.cpp release\moc_todo_list.cpp release\moc_working_with_files.cpp
 release/moc_add.cpp: ../../add.h \
-		../../todo_list.h \
-		../../working_with_files.h \
-		../../json_file_manager.h \
-		../../config.h \
 		release/moc_predefs.h \
 		C:/msys64/mingw64/bin/moc.exe
 	C:\msys64\mingw64\bin\moc.exe $(DEFINES) --include D:/project/ToDo/build/Desktop_Qt_5_15_16_shared_MinGW_w64_MINGW64_MSYS2-Debug/release/moc_predefs.h -IC:/msys64/mingw64/share/qt5/mkspecs/win32-g++ -ID:/project/ToDo -IC:/msys64/mingw64/include/QtWidgets -IC:/msys64/mingw64/include/QtGui -IC:/msys64/mingw64/include/QtNetwork -IC:/msys64/mingw64/include/QtCore -I. -IC:/msys64/mingw64/include/c++/15.1.0 -IC:/msys64/mingw64/include/c++/15.1.0/x86_64-w64-mingw32 -IC:/msys64/mingw64/include/c++/15.1.0/backward -IC:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/15.1.0/include -IC:/msys64/mingw64/include -IC:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/15.1.0/include-fixed ..\..\add.h -o release\moc_add.cpp
 
-release/moc_apiclient.cpp: ../../apiclient.h \
+release/moc_api_client.cpp: ../../api_client.h \
 		release/moc_predefs.h \
 		C:/msys64/mingw64/bin/moc.exe
-	C:\msys64\mingw64\bin\moc.exe $(DEFINES) --include D:/project/ToDo/build/Desktop_Qt_5_15_16_shared_MinGW_w64_MINGW64_MSYS2-Debug/release/moc_predefs.h -IC:/msys64/mingw64/share/qt5/mkspecs/win32-g++ -ID:/project/ToDo -IC:/msys64/mingw64/include/QtWidgets -IC:/msys64/mingw64/include/QtGui -IC:/msys64/mingw64/include/QtNetwork -IC:/msys64/mingw64/include/QtCore -I. -IC:/msys64/mingw64/include/c++/15.1.0 -IC:/msys64/mingw64/include/c++/15.1.0/x86_64-w64-mingw32 -IC:/msys64/mingw64/include/c++/15.1.0/backward -IC:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/15.1.0/include -IC:/msys64/mingw64/include -IC:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/15.1.0/include-fixed ..\..\apiclient.h -o release\moc_apiclient.cpp
+	C:\msys64\mingw64\bin\moc.exe $(DEFINES) --include D:/project/ToDo/build/Desktop_Qt_5_15_16_shared_MinGW_w64_MINGW64_MSYS2-Debug/release/moc_predefs.h -IC:/msys64/mingw64/share/qt5/mkspecs/win32-g++ -ID:/project/ToDo -IC:/msys64/mingw64/include/QtWidgets -IC:/msys64/mingw64/include/QtGui -IC:/msys64/mingw64/include/QtNetwork -IC:/msys64/mingw64/include/QtCore -I. -IC:/msys64/mingw64/include/c++/15.1.0 -IC:/msys64/mingw64/include/c++/15.1.0/x86_64-w64-mingw32 -IC:/msys64/mingw64/include/c++/15.1.0/backward -IC:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/15.1.0/include -IC:/msys64/mingw64/include -IC:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/15.1.0/include-fixed ..\..\api_client.h -o release\moc_api_client.cpp
 
-release/moc_authdialog.cpp: ../../authdialog.h \
+release/moc_auth_dialog.cpp: ../../auth_dialog.h \
 		release/moc_predefs.h \
 		C:/msys64/mingw64/bin/moc.exe
-	C:\msys64\mingw64\bin\moc.exe $(DEFINES) --include D:/project/ToDo/build/Desktop_Qt_5_15_16_shared_MinGW_w64_MINGW64_MSYS2-Debug/release/moc_predefs.h -IC:/msys64/mingw64/share/qt5/mkspecs/win32-g++ -ID:/project/ToDo -IC:/msys64/mingw64/include/QtWidgets -IC:/msys64/mingw64/include/QtGui -IC:/msys64/mingw64/include/QtNetwork -IC:/msys64/mingw64/include/QtCore -I. -IC:/msys64/mingw64/include/c++/15.1.0 -IC:/msys64/mingw64/include/c++/15.1.0/x86_64-w64-mingw32 -IC:/msys64/mingw64/include/c++/15.1.0/backward -IC:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/15.1.0/include -IC:/msys64/mingw64/include -IC:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/15.1.0/include-fixed ..\..\authdialog.h -o release\moc_authdialog.cpp
+	C:\msys64\mingw64\bin\moc.exe $(DEFINES) --include D:/project/ToDo/build/Desktop_Qt_5_15_16_shared_MinGW_w64_MINGW64_MSYS2-Debug/release/moc_predefs.h -IC:/msys64/mingw64/share/qt5/mkspecs/win32-g++ -ID:/project/ToDo -IC:/msys64/mingw64/include/QtWidgets -IC:/msys64/mingw64/include/QtGui -IC:/msys64/mingw64/include/QtNetwork -IC:/msys64/mingw64/include/QtCore -I. -IC:/msys64/mingw64/include/c++/15.1.0 -IC:/msys64/mingw64/include/c++/15.1.0/x86_64-w64-mingw32 -IC:/msys64/mingw64/include/c++/15.1.0/backward -IC:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/15.1.0/include -IC:/msys64/mingw64/include -IC:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/15.1.0/include-fixed ..\..\auth_dialog.h -o release\moc_auth_dialog.cpp
 
 release/moc_calendar.cpp: ../../calendar.h \
 		release/moc_predefs.h \
@@ -194,10 +193,6 @@ release/moc_calendar.cpp: ../../calendar.h \
 	C:\msys64\mingw64\bin\moc.exe $(DEFINES) --include D:/project/ToDo/build/Desktop_Qt_5_15_16_shared_MinGW_w64_MINGW64_MSYS2-Debug/release/moc_predefs.h -IC:/msys64/mingw64/share/qt5/mkspecs/win32-g++ -ID:/project/ToDo -IC:/msys64/mingw64/include/QtWidgets -IC:/msys64/mingw64/include/QtGui -IC:/msys64/mingw64/include/QtNetwork -IC:/msys64/mingw64/include/QtCore -I. -IC:/msys64/mingw64/include/c++/15.1.0 -IC:/msys64/mingw64/include/c++/15.1.0/x86_64-w64-mingw32 -IC:/msys64/mingw64/include/c++/15.1.0/backward -IC:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/15.1.0/include -IC:/msys64/mingw64/include -IC:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/15.1.0/include-fixed ..\..\calendar.h -o release\moc_calendar.cpp
 
 release/moc_edit.cpp: ../../edit.h \
-		../../todo_list.h \
-		../../working_with_files.h \
-		../../json_file_manager.h \
-		../../config.h \
 		release/moc_predefs.h \
 		C:/msys64/mingw64/bin/moc.exe
 	C:\msys64\mingw64\bin\moc.exe $(DEFINES) --include D:/project/ToDo/build/Desktop_Qt_5_15_16_shared_MinGW_w64_MINGW64_MSYS2-Debug/release/moc_predefs.h -IC:/msys64/mingw64/share/qt5/mkspecs/win32-g++ -ID:/project/ToDo -IC:/msys64/mingw64/include/QtWidgets -IC:/msys64/mingw64/include/QtGui -IC:/msys64/mingw64/include/QtNetwork -IC:/msys64/mingw64/include/QtCore -I. -IC:/msys64/mingw64/include/c++/15.1.0 -IC:/msys64/mingw64/include/c++/15.1.0/x86_64-w64-mingw32 -IC:/msys64/mingw64/include/c++/15.1.0/backward -IC:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/15.1.0/include -IC:/msys64/mingw64/include -IC:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/15.1.0/include-fixed ..\..\edit.h -o release\moc_edit.cpp
@@ -214,8 +209,6 @@ release/moc_main_window.cpp: ../../main_window.h \
 
 release/moc_todo_list.cpp: ../../todo_list.h \
 		../../working_with_files.h \
-		../../json_file_manager.h \
-		../../config.h \
 		release/moc_predefs.h \
 		C:/msys64/mingw64/bin/moc.exe
 	C:\msys64\mingw64\bin\moc.exe $(DEFINES) --include D:/project/ToDo/build/Desktop_Qt_5_15_16_shared_MinGW_w64_MINGW64_MSYS2-Debug/release/moc_predefs.h -IC:/msys64/mingw64/share/qt5/mkspecs/win32-g++ -ID:/project/ToDo -IC:/msys64/mingw64/include/QtWidgets -IC:/msys64/mingw64/include/QtGui -IC:/msys64/mingw64/include/QtNetwork -IC:/msys64/mingw64/include/QtCore -I. -IC:/msys64/mingw64/include/c++/15.1.0 -IC:/msys64/mingw64/include/c++/15.1.0/x86_64-w64-mingw32 -IC:/msys64/mingw64/include/c++/15.1.0/backward -IC:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/15.1.0/include -IC:/msys64/mingw64/include -IC:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/15.1.0/include-fixed ..\..\todo_list.h -o release\moc_todo_list.cpp
@@ -269,44 +262,44 @@ compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_heade
 ####### Compile
 
 release/add.o: ../../add.cpp ../../add.h \
-		../../todo_list.h \
-		../../working_with_files.h \
-		../../json_file_manager.h \
-		../../config.h \
 		ui_add.h \
-		../../globals.h
+		../../globals.h \
+		../../working_with_files.h \
+		../../api_client.h \
+		../../todo_list.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\add.o ..\..\add.cpp
 
-release/apiclient.o: ../../apiclient.cpp ../../apiclient.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\apiclient.o ..\..\apiclient.cpp
+release/api_client.o: ../../api_client.cpp ../../api_client.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\api_client.o ..\..\api_client.cpp
 
-release/authdialog.o: ../../authdialog.cpp ../../authdialog.h \
+release/auth_dialog.o: ../../auth_dialog.cpp ../../auth_dialog.h \
 		ui_auth.h \
-		../../apiclient.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\authdialog.o ..\..\authdialog.cpp
+		../../api_client.h \
+		../../calendar.h \
+		../../globals.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\auth_dialog.o ..\..\auth_dialog.cpp
 
 release/calendar.o: ../../calendar.cpp ../../calendar.h \
 		ui_calendar.h \
 		../../todo_list.h \
-		../../working_with_files.h \
-		../../json_file_manager.h \
-		../../config.h
+		../../working_with_files.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\calendar.o ..\..\calendar.cpp
 
 release/edit.o: ../../edit.cpp ../../edit.h \
+		ui_edit.h \
 		../../todo_list.h \
 		../../working_with_files.h \
-		../../json_file_manager.h \
-		../../config.h \
-		ui_edit.h \
-		../../globals.h
+		../../globals.h \
+		../../api_client.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\edit.o ..\..\edit.cpp
+
+release/globals.o: ../../globals.cpp ../../globals.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\globals.o ..\..\globals.cpp
 
 release/json_file_manager.o: ../../json_file_manager.cpp ../../json_file_manager.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\json_file_manager.o ..\..\json_file_manager.cpp
 
-release/main.o: ../../main.cpp ../../main_window.h \
-		../../authdialog.h \
+release/main.o: ../../main.cpp ../../auth_dialog.h \
 		../../globals.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\main.o ..\..\main.cpp
 
@@ -317,13 +310,12 @@ release/main_window.o: ../../main_window.cpp ../../main_window.h \
 
 release/todo_list.o: ../../todo_list.cpp ../../todo_list.h \
 		../../working_with_files.h \
-		../../json_file_manager.h \
-		../../config.h \
 		ui_todo_list.h \
 		../../calendar.h \
 		../../add.h \
 		../../edit.h \
-		../../globals.h
+		../../globals.h \
+		../../api_client.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\todo_list.o ..\..\todo_list.cpp
 
 release/working_with_files.o: ../../working_with_files.cpp ../../working_with_files.h
@@ -335,11 +327,11 @@ release/qrc_resources.o: release/qrc_resources.cpp
 release/moc_add.o: release/moc_add.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\moc_add.o release\moc_add.cpp
 
-release/moc_apiclient.o: release/moc_apiclient.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\moc_apiclient.o release\moc_apiclient.cpp
+release/moc_api_client.o: release/moc_api_client.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\moc_api_client.o release\moc_api_client.cpp
 
-release/moc_authdialog.o: release/moc_authdialog.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\moc_authdialog.o release\moc_authdialog.cpp
+release/moc_auth_dialog.o: release/moc_auth_dialog.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\moc_auth_dialog.o release\moc_auth_dialog.cpp
 
 release/moc_calendar.o: release/moc_calendar.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\moc_calendar.o release\moc_calendar.cpp

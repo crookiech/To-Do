@@ -7,10 +7,9 @@
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QFile>
-#include <QDebug>
 #include <vector>
 
-struct TaskData {
+struct Task_Data {
     int year;
     int month;
     int day;
@@ -20,7 +19,7 @@ struct TaskData {
     int user_id;
     int task_id;
 
-    QJsonObject toJson() const {
+    QJsonObject to_json() const {
         QJsonObject obj;
         obj["year"] = year;
         obj["month"] = month;
@@ -33,8 +32,8 @@ struct TaskData {
         return obj;
     }
 
-    static TaskData fromJson(const QJsonObject& obj) {
-        TaskData task;
+    static Task_Data from_json(const QJsonObject& obj) {
+        Task_Data task;
         task.year = obj["year"].toInt();
         task.month = obj["month"].toInt();
         task.day = obj["day"].toInt();
@@ -47,20 +46,20 @@ struct TaskData {
     }
 };
 
-class JsonFileManager : public QObject {
+class Json_File_Manager : public QObject {
     Q_OBJECT
 
 public:
-    explicit JsonFileManager(QObject *parent = nullptr);
-    bool loadTasks(const QString &filePath, std::vector<TaskData> &tasks);
-    bool saveTasks(const QString &filePath, const std::vector<TaskData> &tasks);
-    bool addTask(const QString &filePath, const TaskData &task);
-    bool updateTask(const QString &filePath, const TaskData &task);
-    bool deleteTask(const QString &filePath, const TaskData &task);
-    int getNextTaskId(const QString &filePath);
+    explicit Json_File_Manager(QObject *parent = nullptr);
+    bool load_tasks(const QString &file_path, std::vector<Task_Data> &tasks);
+    bool save_tasks(const QString &file_path, const std::vector<Task_Data> &tasks);
+    bool add_task(const QString &file_path, const Task_Data &task);
+    bool update_task(const QString &file_path, const Task_Data &task);
+    bool delete_task(const QString &file_path, const Task_Data &task);
+    int get_next_task_id(const QString &file_path);
 
 private:
-    QString m_filePath;
+    QString m_file_path;
 };
 
 #endif // JSON_FILE_MANAGER_H

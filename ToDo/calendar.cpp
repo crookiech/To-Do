@@ -1,15 +1,13 @@
 #include "calendar.h"
 #include "ui_calendar.h"
 #include "todo_list.h"
-#include <QTextCharFormat>
-#include <QPalette>
 
 Calendar::Calendar(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Calendar)
 {
     ui->setupUi(this);
-    connect(ui->calendarWidget, &QCalendarWidget::clicked, this, &Calendar::onDateClicked);
+    connect(ui->calendarWidget, &QCalendarWidget::clicked, this, &Calendar::on_date_clicked);
     ui->calendarWidget->setVerticalHeaderFormat(QCalendarWidget::NoVerticalHeader);
 }
 
@@ -18,12 +16,12 @@ Calendar::~Calendar()
     delete ui;
 }
 
-void Calendar::onDateClicked()
+void Calendar::on_date_clicked()
 {
-    QDate selectedDate = ui->calendarWidget->selectedDate();
-    int day = selectedDate.day();
-    int month = selectedDate.month();
-    int year = selectedDate.year();
+    QDate selected_date = ui->calendarWidget->selectedDate();
+    int day = selected_date.day();
+    int month = selected_date.month();
+    int year = selected_date.year();
     hide();
     ToDo_List window(day, month, year, this);
     window.setModal(true);

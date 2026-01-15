@@ -26,6 +26,7 @@ class TaskCreate(BaseModel):
     hours: int
     minutes: int
     is_completed: Optional[bool] = False
+    local_id: Optional[int] = None
 
 class TaskUpdate(BaseModel):
     title: Optional[str] = None
@@ -124,7 +125,7 @@ async def login(login_data: UserLogin):
         cursor.close()
         conn.close()
 
-# Проверка существования пользователя (новый endpoint)
+# Проверка существования пользователя
 @app.get("/api/check-user/{username}")
 async def check_user(username: str):
     conn = get_db_connection()
@@ -162,19 +163,16 @@ async def create_task(user_id: int, task_data: TaskCreate):
     conn = get_db_connection()
     cursor = conn.cursor()
     try:
-        # Проверяем существование пользователя
         cursor.execute("SELECT id FROM users WHERE id = %s", (user_id,))
         if not cursor.fetchone():
             return {
                 "status": "error",
                 "message": "Пользователь не найден"
             }
-        
-        # Создание задачи
         cursor.execute('''
-            INSERT INTO tasks (user_id, title, year, month, day, hours, minutes, is_completed)
-            VALUES (%s, %s, %s, %s, %s, %s, %s, %s) RETURNING id 
-        ''', (
+                       INSERT INTO tasks (user_id, title, year, month, day, hours, minutes, is_completed)
+                       VALUES (%s, %s, %s, %s, %s, %s, %s, %s) RETURNING id 
+                       ''', (
             user_id, task_data.title, 
             task_data.year, task_data.month, task_data.day,
             task_data.hours, task_data.minutes,
@@ -182,10 +180,10 @@ async def create_task(user_id: int, task_data: TaskCreate):
         ))
         task_id = cursor.fetchone()['id']
         conn.commit()
-        
         return {
             "status": "success", 
             "task_id": task_id,
+            "local_id": task_data.local_id,
             "message": "Задача создана успешно"
         }
     except Exception as e:
@@ -209,22 +207,18 @@ async def get_user_tasks(
     conn = get_db_connection()
     cursor = conn.cursor()
     try:
-        # Проверяем существование пользователя
         cursor.execute("SELECT id FROM users WHERE id = %s", (user_id,))
         if not cursor.fetchone():
             return {
                 "status": "error",
                 "message": "Пользователь не найден"
             }
-        
         sql = '''
-            SELECT id, title, year, month, day, 
-                   hours, minutes, is_completed
-            FROM tasks 
-            WHERE user_id = %s
+        SELECT id, title, year, month, day, hours, minutes, is_completed
+        FROM tasks
+        WHERE user_id = %s
         '''
         params = [user_id]
-        
         if year and month and day:
             sql += " AND year = %s AND month = %s AND day = %s"
             params.extend([year, month, day])
@@ -234,11 +228,9 @@ async def get_user_tasks(
         elif year:
             sql += " AND year = %s"
             params.append(year)
-        
         sql += " ORDER BY year, month, day, hours, minutes"
         cursor.execute(sql, params)
         tasks = cursor.fetchall()
-        
         return {
             "status": "success",
             "user_id": user_id,
@@ -260,60 +252,82 @@ async def update_task(user_id: int, task_id: int, task_data: TaskUpdate):
     conn = get_db_connection()
     cursor = conn.cursor()
     try:
-        # Проверяем, что задача существует и принадлежит пользователю
+        print(f"\n=== PUT REQUEST START ===")
+        print(f"Updating task {task_id} for user {user_id}")
+        print(f"Update data received: {task_data.dict(exclude_unset=True)}")
         cursor.execute(
-            "SELECT id FROM tasks WHERE id = %s AND user_id = %s", 
+            "SELECT id, title, year, month, day, hours, minutes, is_completed FROM tasks WHERE id = %s AND user_id = %s", 
             (task_id, user_id)
         )
-        if not cursor.fetchone():
+        existing_task = cursor.fetchone()
+        if not existing_task:
+            print(f"Task {task_id} not found for user {user_id}")
             return {
                 "status": "error",
                 "message": "Задача не найдена"
             }
-        
-        # Формируем запрос на обновление
+        print(f"Existing task before update: {existing_task}")
         update_fields = []
         values = []
-        
-        if task_data.title is not None:
+        fields_to_update = task_data.dict(exclude_unset=True)
+        print(f"Fields to update: {fields_to_update}")
+        if "title" in fields_to_update:
             update_fields.append("title = %s")
             values.append(task_data.title)
-        if task_data.year is not None:
+            print(f"  - Title: {task_data.title} (was: {existing_task['title']})")
+        if "year" in fields_to_update:
             update_fields.append("year = %s")
             values.append(task_data.year)
-        if task_data.month is not None:
+            print(f"  - Year: {task_data.year} (was: {existing_task['year']})")
+        if "month" in fields_to_update:
             update_fields.append("month = %s")
             values.append(task_data.month)
-        if task_data.day is not None:
+            print(f"  - Month: {task_data.month} (was: {existing_task['month']})")
+        if "day" in fields_to_update:
             update_fields.append("day = %s")
             values.append(task_data.day)
-        if task_data.hours is not None:
+            print(f"  - Day: {task_data.day} (was: {existing_task['day']})")
+        if "hours" in fields_to_update:
             update_fields.append("hours = %s")
             values.append(task_data.hours)
-        if task_data.minutes is not None:
+            print(f"  - Hours: {task_data.hours} (was: {existing_task['hours']})")
+        if "minutes" in fields_to_update:
             update_fields.append("minutes = %s")
             values.append(task_data.minutes)
-        if task_data.is_completed is not None:
+            print(f"  - Minutes: {task_data.minutes} (was: {existing_task['minutes']})")
+        if "is_completed" in fields_to_update:
             update_fields.append("is_completed = %s")
             values.append(task_data.is_completed)
-        
+            print(f"  - Completed: {task_data.is_completed} (was: {existing_task['is_completed']})")
         if not update_fields:
+            print("No fields to update")
             return {
                 "status": "error",
                 "message": "Нет полей для обновления"
             }
-        
         values.extend([task_id, user_id])
         sql = f"UPDATE tasks SET {', '.join(update_fields)} WHERE id = %s AND user_id = %s"
+        print(f"SQL: {sql}")
+        print(f"Values: {values}")
         cursor.execute(sql, values)
         conn.commit()
-        
+        cursor.execute(
+            "SELECT id, title, year, month, day, hours, minutes, is_completed FROM tasks WHERE id = %s AND user_id = %s", 
+            (task_id, user_id)
+        )
+        updated_task = cursor.fetchone()
+        print(f"Task after update: {updated_task}")
+        print(f"=== PUT REQUEST END ===\n")
         return {
             "status": "success", 
+            "task_id": task_id,
             "message": f"Задача {task_id} обновлена успешно"
         }
     except Exception as e:
         conn.rollback()
+        print(f"Error updating task: {str(e)}")
+        import traceback
+        traceback.print_exc()
         return {
             "status": "error",
             "message": f"Ошибка обновления задачи: {str(e)}"
@@ -328,30 +342,32 @@ async def delete_task(user_id: int, task_id: int):
     conn = get_db_connection()
     cursor = conn.cursor()
     try:
-        # Проверяем существование задачи
+        print(f"DELETE request: user_id={user_id}, task_id={task_id}")
         cursor.execute(
             "SELECT id FROM tasks WHERE id = %s AND user_id = %s", 
             (task_id, user_id)
         )
-        if not cursor.fetchone():
+        task = cursor.fetchone()
+        if not task:
+            print(f"Task {task_id} not found for user {user_id}")
             return {
                 "status": "error",
                 "message": "Задача не найдена"
             }
-        
-        # Удаляем задачу
+        print(f"Deleting task {task_id} for user {user_id}")
         cursor.execute(
             "DELETE FROM tasks WHERE id = %s AND user_id = %s", 
             (task_id, user_id)
         )
         conn.commit()
-        
+        print(f"Task {task_id} deleted successfully")
         return {
             "status": "success", 
             "message": f"Задача {task_id} удалена успешно"
         }
     except Exception as e:
         conn.rollback()
+        print(f"Error deleting task: {str(e)}")
         return {
             "status": "error",
             "message": f"Ошибка удаления задачи: {str(e)}"

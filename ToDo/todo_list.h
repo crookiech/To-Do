@@ -5,12 +5,12 @@
 #include <QMessageBox>
 #include <QListWidgetItem>
 #include "working_with_files.h"
-#include "json_file_manager.h"
-#include "config.h"
 
 namespace Ui {
 class ToDo_List;
 }
+
+class Api_Client;
 
 class ToDo_List : public QDialog
 {
@@ -31,6 +31,8 @@ private slots:
     void on_edit_task_clicked();
     void on_delete_task_clicked();
     void on_list_tasks_changed(QListWidgetItem *item);
+    void on_task_deleted();
+    void onApiError(const QString& errorMessage);
 
 private:
     Ui::ToDo_List *ui;
@@ -38,6 +40,8 @@ private:
     int month;
     int year;
     Working_With_Files file_manager;
+    Api_Client* apiClient;
+    void deleteTaskFromServer(int task_id);
 };
 
 #endif // TODO_LIST_H

@@ -13,8 +13,6 @@ Main_Window::Main_Window(QWidget *parent):
     if (!img.isNull()) {
         QPixmap scaled_img = img.scaled(ui->icon->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
         ui->icon->setPixmap(scaled_img);
-    } else {
-        qDebug() << "calendar.cpp: Couldn't upload image";
     }
 }
 
@@ -22,7 +20,6 @@ Main_Window::~Main_Window()
 {
     delete ui;
 }
-
 
 void Main_Window::on_start_button_clicked()
 {

@@ -19,7 +19,7 @@ private:
     Ui::Calendar *ui;
 
 private slots:
-    void onDateClicked();
+    void on_date_clicked();
 };
 
 #endif // CALENDAR_H
