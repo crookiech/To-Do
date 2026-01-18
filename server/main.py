@@ -1,6 +1,6 @@
-from fastapi import FastAPI, HTTPException, Path, Query
+from fastapi import FastAPI, Query
 from pydantic import BaseModel
-from typing import List, Optional
+from typing import Optional
 import psycopg2
 from psycopg2.extras import RealDictCursor
 
@@ -90,6 +90,7 @@ async def register(user_data: UserRegister):
         cursor.close()
         conn.close()
 
+# Вход пользователя
 @app.post("/api/login")
 async def login(login_data: UserLogin):
     conn = get_db_connection()
@@ -252,72 +253,53 @@ async def update_task(user_id: int, task_id: int, task_data: TaskUpdate):
     conn = get_db_connection()
     cursor = conn.cursor()
     try:
-        print(f"\n=== PUT REQUEST START ===")
-        print(f"Updating task {task_id} for user {user_id}")
-        print(f"Update data received: {task_data.dict(exclude_unset=True)}")
         cursor.execute(
             "SELECT id, title, year, month, day, hours, minutes, is_completed FROM tasks WHERE id = %s AND user_id = %s", 
             (task_id, user_id)
         )
         existing_task = cursor.fetchone()
         if not existing_task:
-            print(f"Task {task_id} not found for user {user_id}")
             return {
                 "status": "error",
                 "message": "Задача не найдена"
             }
-        print(f"Existing task before update: {existing_task}")
         update_fields = []
         values = []
         fields_to_update = task_data.dict(exclude_unset=True)
-        print(f"Fields to update: {fields_to_update}")
         if "title" in fields_to_update:
             update_fields.append("title = %s")
             values.append(task_data.title)
-            print(f"  - Title: {task_data.title} (was: {existing_task['title']})")
         if "year" in fields_to_update:
             update_fields.append("year = %s")
             values.append(task_data.year)
-            print(f"  - Year: {task_data.year} (was: {existing_task['year']})")
         if "month" in fields_to_update:
             update_fields.append("month = %s")
             values.append(task_data.month)
-            print(f"  - Month: {task_data.month} (was: {existing_task['month']})")
         if "day" in fields_to_update:
             update_fields.append("day = %s")
             values.append(task_data.day)
-            print(f"  - Day: {task_data.day} (was: {existing_task['day']})")
         if "hours" in fields_to_update:
             update_fields.append("hours = %s")
             values.append(task_data.hours)
-            print(f"  - Hours: {task_data.hours} (was: {existing_task['hours']})")
         if "minutes" in fields_to_update:
             update_fields.append("minutes = %s")
             values.append(task_data.minutes)
-            print(f"  - Minutes: {task_data.minutes} (was: {existing_task['minutes']})")
         if "is_completed" in fields_to_update:
             update_fields.append("is_completed = %s")
             values.append(task_data.is_completed)
-            print(f"  - Completed: {task_data.is_completed} (was: {existing_task['is_completed']})")
         if not update_fields:
-            print("No fields to update")
             return {
                 "status": "error",
                 "message": "Нет полей для обновления"
             }
         values.extend([task_id, user_id])
         sql = f"UPDATE tasks SET {', '.join(update_fields)} WHERE id = %s AND user_id = %s"
-        print(f"SQL: {sql}")
-        print(f"Values: {values}")
         cursor.execute(sql, values)
         conn.commit()
         cursor.execute(
             "SELECT id, title, year, month, day, hours, minutes, is_completed FROM tasks WHERE id = %s AND user_id = %s", 
             (task_id, user_id)
         )
-        updated_task = cursor.fetchone()
-        print(f"Task after update: {updated_task}")
-        print(f"=== PUT REQUEST END ===\n")
         return {
             "status": "success", 
             "task_id": task_id,
@@ -325,7 +307,6 @@ async def update_task(user_id: int, task_id: int, task_data: TaskUpdate):
         }
     except Exception as e:
         conn.rollback()
-        print(f"Error updating task: {str(e)}")
         import traceback
         traceback.print_exc()
         return {
@@ -342,32 +323,27 @@ async def delete_task(user_id: int, task_id: int):
     conn = get_db_connection()
     cursor = conn.cursor()
     try:
-        print(f"DELETE request: user_id={user_id}, task_id={task_id}")
         cursor.execute(
             "SELECT id FROM tasks WHERE id = %s AND user_id = %s", 
             (task_id, user_id)
         )
         task = cursor.fetchone()
         if not task:
-            print(f"Task {task_id} not found for user {user_id}")
             return {
                 "status": "error",
                 "message": "Задача не найдена"
             }
-        print(f"Deleting task {task_id} for user {user_id}")
         cursor.execute(
             "DELETE FROM tasks WHERE id = %s AND user_id = %s", 
             (task_id, user_id)
         )
         conn.commit()
-        print(f"Task {task_id} deleted successfully")
         return {
             "status": "success", 
             "message": f"Задача {task_id} удалена успешно"
         }
     except Exception as e:
         conn.rollback()
-        print(f"Error deleting task: {str(e)}")
         return {
             "status": "error",
             "message": f"Ошибка удаления задачи: {str(e)}"

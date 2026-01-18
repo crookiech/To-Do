@@ -93,7 +93,7 @@ void Auth_Dialog::on_user_checked(bool exists)
 {
     if (!exists) {
         is_processing = false;
-        QMessageBox* msg_box = create_message_box(this, "Ошибка", "Пользователь с таким именем не зарегистрирован", QMessageBox::Critical);
+        QMessageBox* msg_box = create_message_box(this, "Ошибка при входе", "Пользователь с таким именем не зарегистрирован", QMessageBox::Critical);
         msg_box->show();
     } else {
         api_client->login_user(current_username, current_password);
